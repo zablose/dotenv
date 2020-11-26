@@ -18,7 +18,7 @@ class Env
                 [$n, $v] = explode('=', $line);
                 $name = strtoupper(trim($n));
                 $value = trim(trim($v), '"\'');
-                self::$vars[$name] = $this->parseValue($value);
+                self::$vars[$name] = Value::parse($value, self::$vars);
             }
 
             if (! feof($file)) {
@@ -34,39 +34,5 @@ class Env
     public static function get($key, $default = '')
     {
         return self::$vars[$key] ?? $default;
-    }
-
-    private function parseValue(string $value)
-    {
-        $value = $this->checkValueForVars($value);
-
-        if ($value === 'true') {
-            return true;
-        }
-
-        if ($value === 'false') {
-            return false;
-        }
-
-        if (is_numeric($value)) {
-            return strpos($value, '.') === false ? intval($value) : floatval($value);
-        }
-
-        return $value;
-    }
-
-    private function checkValueForVars(string $value)
-    {
-        $var_start = strpos($value, '${');
-        $var_end = strpos($value, '}');
-        while ($var_start !== false && $var_end !== false && $var_end > $var_start) {
-            $var_name = strtolower(substr($value, $var_start + 2, $var_end - $var_start - 2));
-            $var_value = $this->vars[$var_name] ?? 'undefined';
-            $value = str_replace('${'.strtoupper($var_name).'}', $var_value, $value);
-            $var_start = strpos($value, '${');
-            $var_end = strpos($value, '}');
-        }
-
-        return $value;
     }
 }
