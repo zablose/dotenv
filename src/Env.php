@@ -35,4 +35,11 @@ class Env
     {
         return self::$vars[$key] ?? $default;
     }
+
+    public function clear()
+    {
+        self::$vars = [];
+
+        return $this;
+    }
 }
