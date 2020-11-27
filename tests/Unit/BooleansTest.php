@@ -9,7 +9,7 @@ class BooleansTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->read(__DIR__.'/../data/envs/booleans.env');
+        (new Env())->reset()->read(__DIR__.'/../data/envs/booleans.env');
     }
 
     public function booleans()
@@ -32,5 +32,11 @@ class BooleansTest extends UnitTestCase
     public function it_understands_type_bool($key, $value)
     {
         $this->assertSame($value, Env::get($key, 'default'));
+    }
+
+    /** @test */
+    public function count_variables()
+    {
+        $this->assertSame(3, count(Env::all()));
     }
 }

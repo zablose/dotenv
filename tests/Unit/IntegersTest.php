@@ -9,7 +9,7 @@ class IntegersTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->read(__DIR__.'/../data/envs/integers.env');
+        (new Env())->reset()->read(__DIR__.'/../data/envs/integers.env');
     }
 
     public function integers()
@@ -34,5 +34,11 @@ class IntegersTest extends UnitTestCase
     public function it_understands_type_int($key, $value)
     {
         $this->assertSame($value, Env::get($key, 'default'));
+    }
+
+    /** @test */
+    public function count_variables()
+    {
+        $this->assertSame(5, count(Env::all()));
     }
 }

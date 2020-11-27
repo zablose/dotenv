@@ -9,7 +9,7 @@ class StringsTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->read(__DIR__.'/../data/envs/strings.env');
+        (new Env())->reset()->read(__DIR__.'/../data/envs/strings.env');
     }
 
     public function strings()
@@ -33,5 +33,11 @@ class StringsTest extends UnitTestCase
     public function it_understands_type_string($key, $value)
     {
         $this->assertSame($value, Env::get($key, 'default'));
+    }
+
+    /** @test */
+    public function count_variables()
+    {
+        $this->assertSame(4, count(Env::all()));
     }
 }

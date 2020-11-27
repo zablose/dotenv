@@ -36,7 +36,7 @@ class Env
         return self::$vars[$key] ?? $default;
     }
 
-    public function clear(): self
+    public function reset(): self
     {
         self::$vars = [];
 

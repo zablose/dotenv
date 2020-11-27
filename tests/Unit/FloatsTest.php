@@ -9,7 +9,7 @@ class FloatsTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->read(__DIR__.'/../data/envs/floats.env');
+        (new Env())->reset()->read(__DIR__.'/../data/envs/floats.env');
     }
 
     public function floats()
@@ -34,5 +34,11 @@ class FloatsTest extends UnitTestCase
     public function it_understands_type_float($key, $value)
     {
         $this->assertSame($value, Env::get($key, 'default'));
+    }
+
+    /** @test */
+    public function count_variables()
+    {
+        $this->assertSame(5, count(Env::all()));
     }
 }

@@ -9,7 +9,7 @@ class NullTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->clear()->read(__DIR__.'/../data/envs/null.env');
+        (new Env())->reset()->read(__DIR__.'/../data/envs/null.env');
     }
 
     public function nullables()

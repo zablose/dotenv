@@ -9,7 +9,7 @@ class VariablesTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->clear()->read(__DIR__.'/../data/envs/variables.env');
+        (new Env())->reset()->read(__DIR__.'/../data/envs/variables.env');
     }
 
     public function strings()
@@ -38,5 +38,11 @@ class VariablesTest extends UnitTestCase
     public function it_understands_variables($key, $value)
     {
         $this->assertSame($value, Env::get($key, 'default'));
+    }
+
+    /** @test */
+    public function count_variables()
+    {
+        $this->assertSame(9, count(Env::all()));
     }
 }
