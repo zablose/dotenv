@@ -18,9 +18,12 @@ class SpecificsTest extends UnitTestCase
             ['ONLY_CLOSING_SINGLE_QUOTE', 'value'],
             ['ONLY_OPENING_SINGLE_QUOTE', 'value'],
             ['SINGLE_QUOTE_IN_THE_MIDDLE', "val'ue"],
-            ['VAR_RegiSter_Does_Not_MATTER', 'VAlue does thOugh.'],
             ['EXTRA_SPACES', 'Will be trimmed.'],
             ['VAR WITH SPACES', 'Will work!'],
+
+            ['VAR_RegiSter_Does_Not_MATTER', 'VAlue does thOugh.'],
+            ['var_register_does_not_matter', 'VAlue does thOugh.'],
+            ['VAR_REGISTER_DOES_NOT_MATTER', 'VAlue does thOugh.'],
         ];
     }
 
