@@ -33,7 +33,7 @@ class Env
 
     public static function get($key, $default = null)
     {
-        return self::$vars[$key] ?? $default;
+        return self::$vars[strtoupper($key)] ?? $default;
     }
 
     public function reset(): self
