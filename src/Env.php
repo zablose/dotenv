@@ -31,15 +31,20 @@ class Env
         return $this;
     }
 
-    public static function get($key, $default = '')
+    public static function get($key, $default = null)
     {
         return self::$vars[$key] ?? $default;
     }
 
-    public function clear()
+    public function clear(): self
     {
         self::$vars = [];
 
         return $this;
+    }
+
+    public static function all(): array
+    {
+        return self::$vars;
     }
 }
