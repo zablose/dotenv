@@ -6,7 +6,7 @@ class Value
 {
     public static function parse(string $value, array $vars)
     {
-        $value = Value::replaceVarsWithValues($value, $vars);
+        $value = Value::replaceVarsWithValues(Value::cleanValue($value), $vars);
 
         if ($value === 'true') {
             return true;
@@ -41,5 +41,10 @@ class Value
         }
 
         return $value;
+    }
+
+    private static function cleanValue(string $value): string
+    {
+        return trim(trim($value), '"\'');
     }
 }

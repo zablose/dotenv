@@ -5,6 +5,17 @@ namespace Zablose\DotEnv;
 class Env
 {
     private static array $vars = [];
+    private static array $arrays = [];
+
+    public static function get($key, $default = null)
+    {
+        return self::$vars[strtoupper($key)] ?? $default;
+    }
+
+    public static function all(): array
+    {
+        return self::$vars;
+    }
 
     public function read(string $path): self
     {
@@ -16,9 +27,14 @@ class Env
                     continue;
                 }
                 [$n, $v] = explode('=', $line);
-                $name = strtoupper(trim($n));
-                $value = trim(trim($v), '"\'');
-                self::$vars[$name] = Value::parse($value, self::$vars);
+                $name = $this->parseVariableName($n);
+                $key = $this->parseArrayKey($n, $name);
+                $value = Value::parse($v, self::$vars);
+                if (strlen($key)) {
+                    self::$vars[$name][$key] = $value;
+                } else {
+                    self::$vars[$name] = $value;
+                }
             }
 
             if (! feof($file)) {
@@ -31,20 +47,36 @@ class Env
         return $this;
     }
 
-    public static function get($key, $default = null)
-    {
-        return self::$vars[strtoupper($key)] ?? $default;
-    }
-
     public function reset(): self
     {
         self::$vars = [];
+        self::$arrays = [];
 
         return $this;
     }
 
-    public static function all(): array
+    public function setArrays(array $arrays): self
     {
-        return self::$vars;
+        self::$arrays = $arrays;
+
+        return $this;
+    }
+
+    public function parseVariableName(string $name): string
+    {
+        foreach (self::$arrays as $array_name) {
+            if (strpos($name, $array_name) !== false) {
+                return strtoupper($array_name);
+            }
+        }
+
+        return strtoupper(trim($name));
+    }
+
+    public function parseArrayKey(string $n, string $name): string
+    {
+        $key = str_replace($name.'_', '', $n);
+
+        return $key !== $n ? trim($key) : '';
     }
 }
