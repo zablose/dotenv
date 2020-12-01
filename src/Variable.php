@@ -2,11 +2,29 @@
 
 namespace Zablose\DotEnv;
 
-class Value
+class Variable
 {
-    public static function parse(string $value, array $vars)
+    public static function getName(string $n, array $arrays): string
     {
-        $value = Value::replaceVarsWithValues(Value::cleanValue($value), $vars);
+        foreach ($arrays as $array_name) {
+            if (strpos($n, $array_name) !== false) {
+                return strtoupper($array_name);
+            }
+        }
+
+        return strtoupper(trim($n));
+    }
+
+    public static function getArrayKey(string $n, string $name): string
+    {
+        $key = str_replace($name.'_', '', $n);
+
+        return $key !== $n ? trim($key) : '';
+    }
+
+    public static function getValue(string $value, array $vars)
+    {
+        $value = Variable::replaceVarsWithValues($value, $vars);
 
         if ($value === 'true') {
             return true;
@@ -29,6 +47,8 @@ class Value
 
     private static function replaceVarsWithValues(string $value, array $vars)
     {
+        $value = trim(trim($value), '"\'');
+
         $var_start = strpos($value, '${');
         $var_end = strpos($value, '}');
 
@@ -41,10 +61,5 @@ class Value
         }
 
         return $value;
-    }
-
-    private static function cleanValue(string $value): string
-    {
-        return trim(trim($value), '"\'');
     }
 }

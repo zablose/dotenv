@@ -27,9 +27,9 @@ class Env
                     continue;
                 }
                 [$n, $v] = explode('=', $line);
-                $name = $this->parseVariableName($n);
-                $key = $this->parseArrayKey($n, $name);
-                $value = Value::parse($v, self::$vars);
+                $name = Variable::getName($n, self::$arrays);
+                $key = Variable::getArrayKey($n, $name);
+                $value = Variable::getValue($v, self::$vars);
                 if (strlen($key)) {
                     self::$vars[$name][$key] = $value;
                 } else {
@@ -60,23 +60,5 @@ class Env
         self::$arrays = $arrays;
 
         return $this;
-    }
-
-    public function parseVariableName(string $name): string
-    {
-        foreach (self::$arrays as $array_name) {
-            if (strpos($name, $array_name) !== false) {
-                return strtoupper($array_name);
-            }
-        }
-
-        return strtoupper(trim($name));
-    }
-
-    public function parseArrayKey(string $n, string $name): string
-    {
-        $key = str_replace($name.'_', '', $n);
-
-        return $key !== $n ? trim($key) : '';
     }
 }
