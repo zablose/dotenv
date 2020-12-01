@@ -2,7 +2,6 @@
 
 Read '.env' file to an array with option to set ENVs.
 Support variables, arrays and value types.
-Extendable by a callback.
 
 ## Development
 
