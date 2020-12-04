@@ -1,5 +1,7 @@
 # DotEnv
 
+[![Build Status](https://travis-ci.org/zablose/dotenv.svg?branch=master)](https://travis-ci.org/zablose/dotenv)
+
 Read '.env' file to a static array.
 
 ## Usage
@@ -14,7 +16,7 @@ use Zablose\DotEnv\Env;
 
 // Auto loader
 
-(new Env())->setArrays(['VAR_PROTECTED'])
+(new Env())->setArrays(['PROTECTED'])
     ->read(__DIR__.'/../.env')
     ->read(__DIR__.'/../.env-extra');
 
@@ -26,8 +28,8 @@ use Zablose\DotEnv\Env;
 
 use Zablose\DotEnv\Env;
 
-    $db_name = Env::get('DB_NAME', 'dotenv');
-    $db_password = Env::get('DB_PASSWORD');
+$db_name = Env::get('DB_NAME', 'dotenv');
+$db_password = Env::get('DB_PASSWORD');
 
 ```
 
@@ -42,8 +44,8 @@ use Zablose\DotEnv\Env;
     
 ### Arrays
 
-    USER_0=Jane
-    USER_1=Jack
+    PROTECTED_0=_token
+    PROTECTED_1=password
     
 ### Value Types
 
