@@ -9,7 +9,9 @@ class ArraysTest extends UnitTestCase
 {
     protected function setUp(): void
     {
-        (new Env())->reset()->setArrays(['VAR_DOMAINS', 'VAR_PROTECTED'])->read(__DIR__.'/../data/envs/arrays.env');
+        (new Env())->reset()
+            ->setArrays(['VAR_DOMAINS', 'VAR_PROTECTED', 'VAR_USERS'])
+            ->read(__DIR__.'/../data/envs/arrays.env');
     }
 
     public function arrays()
@@ -28,9 +30,11 @@ class ArraysTest extends UnitTestCase
                 [
                     0 => 'password',
                     1 => '_token',
+                    '' => 'Without a key, second overwrites the first.',
                 ],
             ],
             ['PUB_VAR_PROTECTED_1', "Won't be treated as array."],
+            ['VAR_USERS', "Won't be treated as array."],
         ];
     }
 
@@ -50,6 +54,6 @@ class ArraysTest extends UnitTestCase
     /** @test */
     public function count_variables()
     {
-        $this->assertSame(3, count(Env::all()));
+        $this->assertSame(4, count(Env::all()));
     }
 }

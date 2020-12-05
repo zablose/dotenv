@@ -26,15 +26,14 @@ class Env
                 if (strpos($line, '=') === false) {
                     continue;
                 }
-                [$n, $v] = explode('=', $line);
-                $name = Variable::getName($n, self::$arrays);
-                $key = Variable::getArrayKey($n, $name);
-                $value = Variable::getValue($v, self::$vars);
-                if (strlen($key)) {
-                    self::$vars[$name][$key] = $value;
+                [$raw_name, $raw_value] = explode('=', $line);
+                $variable = Variable::make($raw_name, $raw_value, self::$arrays, self::$vars);
+                if ($variable->is_array) {
+                    self::$vars[$variable->name][$variable->array_key] = $variable->value;
                 } else {
-                    self::$vars[$name] = $value;
+                    self::$vars[$variable->name] = $variable->value;
                 }
+                unset($variable);
             }
 
             if (! feof($file)) {

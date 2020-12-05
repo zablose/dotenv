@@ -4,34 +4,33 @@ namespace Zablose\DotEnv;
 
 class Variable
 {
-    public static function isArray(string $var_name, string $array_name): bool
-    {
-        return strpos($var_name, $array_name.'_') === 0;
-    }
+    public string $name = '';
+    public bool $is_array = false;
+    public string $array_key = '';
+    public $value = null;
 
-    public static function getName(string $n, array $arrays): string
+    public static function make(string $raw_name, string $raw_value, array $arrays, array $vars): self
     {
-        $var_name = trim($n);
+        $var_name = trim($raw_name);
+
+        $variable = new Variable();
+        $variable->name = $var_name;
 
         foreach ($arrays as $array_name) {
-            if (Variable::isArray($var_name, $array_name)) {
-                return $array_name;
+            if (strpos($var_name, $array_name.'_') === 0) {
+                $variable->is_array = true;
+                $variable->name = $array_name;
+                $variable->array_key = str_replace($array_name.'_', '', $var_name);
+                break;
             }
         }
 
-        return $var_name;
+        $variable->value = Variable::getValue($raw_value, $vars);
+
+        return $variable;
     }
 
-    public static function getArrayKey(string $n, string $array_name): string
-    {
-        $var_name = trim($n);
-
-        return Variable::isArray($var_name, $array_name)
-            ? str_replace($array_name.'_', '', $var_name)
-            : '';
-    }
-
-    public static function getValue(string $value, array $vars)
+    private static function getValue(string $value, array $vars)
     {
         $value = Variable::replaceVarsWithValues($value, $vars);
 
