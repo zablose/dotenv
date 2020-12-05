@@ -9,7 +9,7 @@ class Env
 
     public static function get($key, $default = null)
     {
-        return self::$vars[strtoupper($key)] ?? $default;
+        return self::$vars[$key] ?? $default;
     }
 
     public static function all(): array

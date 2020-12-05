@@ -30,6 +30,7 @@ class ArraysTest extends UnitTestCase
                     1 => '_token',
                 ],
             ],
+            ['PUB_VAR_PROTECTED_1', "Won't be treated as array."],
         ];
     }
 
@@ -49,6 +50,6 @@ class ArraysTest extends UnitTestCase
     /** @test */
     public function count_variables()
     {
-        $this->assertSame(2, count(Env::all()));
+        $this->assertSame(3, count(Env::all()));
     }
 }
