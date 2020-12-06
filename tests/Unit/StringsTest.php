@@ -32,7 +32,7 @@ class StringsTest extends UnitTestCase
      */
     public function it_understands_type_string($key, $value)
     {
-        $this->assertSame($value, Env::get($key, 'default'));
+        $this->assertSame($value, env($key, 'default'));
     }
 
     /** @test */

@@ -15,8 +15,8 @@ class EnvTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/integers.env')
             ->read(__DIR__.'/../data/envs/strings.env');
 
-        $this->assertSame(4.0, Env::get('VAR_FLOAT'));
-        $this->assertSame(4, Env::get('VAR_INT'));
-        $this->assertSame('Just a string.', Env::get('VAR_STRING'));
+        $this->assertSame(4.0, env('VAR_FLOAT'));
+        $this->assertSame(4, env('VAR_INT'));
+        $this->assertSame('Just a string.', env('VAR_STRING'));
     }
 }

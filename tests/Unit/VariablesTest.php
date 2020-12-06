@@ -37,7 +37,7 @@ class VariablesTest extends UnitTestCase
      */
     public function it_understands_variables($key, $value)
     {
-        $this->assertSame($value, Env::get($key, 'default'));
+        $this->assertSame($value, env($key, 'default'));
     }
 
     /** @test */

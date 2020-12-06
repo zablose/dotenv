@@ -37,7 +37,7 @@ class SpecificsTest extends UnitTestCase
      */
     public function it_has_specifics($key, $value)
     {
-        $this->assertSame($value, Env::get($key));
+        $this->assertSame($value, env($key));
     }
 
     /** @test */

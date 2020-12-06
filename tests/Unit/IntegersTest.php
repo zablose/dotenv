@@ -33,7 +33,7 @@ class IntegersTest extends UnitTestCase
      */
     public function it_understands_type_int($key, $value)
     {
-        $this->assertSame($value, Env::get($key, 'default'));
+        $this->assertSame($value, env($key, 'default'));
     }
 
     /** @test */

@@ -48,7 +48,7 @@ class ArraysTest extends UnitTestCase
      */
     public function it_supports_arrays($key, $value)
     {
-        $this->assertSame($value, Env::get($key, []));
+        $this->assertSame($value, env($key, []));
     }
 
     /** @test */

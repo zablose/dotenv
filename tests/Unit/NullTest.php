@@ -31,7 +31,7 @@ class NullTest extends UnitTestCase
      */
     public function it_understands_type_null($key, $value)
     {
-        $this->assertSame($value, Env::get($key));
+        $this->assertSame($value, env($key));
     }
 
     /** @test */

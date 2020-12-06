@@ -33,7 +33,7 @@ class FloatsTest extends UnitTestCase
      */
     public function it_understands_type_float($key, $value)
     {
-        $this->assertSame($value, Env::get($key, 'default'));
+        $this->assertSame($value, env($key, 'default'));
     }
 
     /** @test */
