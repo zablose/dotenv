@@ -7,7 +7,7 @@ use Zablose\DotEnv\Env;
 
 class ArraysTest extends UnitTestCase
 {
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
         (new Env())->reset()
             ->setArrays(['VAR_DOMAINS', 'VAR_PROTECTED', 'VAR_USERS'])

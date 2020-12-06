@@ -7,7 +7,7 @@ use Zablose\DotEnv\Env;
 
 class NullTest extends UnitTestCase
 {
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
         (new Env())->reset()->read(__DIR__.'/../data/envs/null.env');
     }
