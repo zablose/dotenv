@@ -20,15 +20,15 @@
     "autoload": {
         "psr-4": {
             "Zablose\\DotEnv\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "config": {
         "preferred-install": "dist",

@@ -4,6 +4,12 @@
 
 Read '.env' file to a static array.
 
+## Installation
+
+```
+composer require zablose/dotenv
+```
+
 ## Usage
 
 ### Read '.env' file(s)
@@ -30,6 +36,17 @@ use Zablose\DotEnv\Env;
 
 $db_name = Env::get('DB_NAME', 'dotenv');
 $db_password = Env::get('DB_PASSWORD');
+
+```
+
+Or
+
+> Works, if helper function is in use - added to the project's composer `autoload -> files` section.
+
+```php
+
+$db_name = env('DB_NAME', 'dotenv');
+$db_password = env('DB_PASSWORD');
 
 ```
 
@@ -70,6 +87,25 @@ Append to `/etc/hosts`.
 127.0.0.1       dotenv.zdev
 127.0.0.1       www.dotenv.zdev
 ```
+
+### Quick Start
+
+    $ git clone -b 'dev' --single-branch --depth 1 https://github.com/zablose/dotenv.git dotenv
+    $ cd dotenv
+    $ git submodule update --init
+    
+    # Copy env file, then ammend it to your needs.
+    $ cp .env.example .env
+    
+    $ docker-compose -p zdev up -d
+    
+    # To see post-script logs, while container is starting.
+    $ tail -f docker-damp/logs/all.log
+    
+    # To enter container, using Bash shell.
+    $ docker exec -it dotenv-damp bash
+    
+    (dotenv-damp)$ phpunit
 
 ## License
 
