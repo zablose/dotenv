@@ -7,7 +7,7 @@ use Zablose\DotEnv\Env;
 
 class BooleansTest extends UnitTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
         (new Env())->reset()->read(__DIR__.'/../data/envs/booleans.env');
     }
@@ -31,7 +31,7 @@ class BooleansTest extends UnitTestCase
      */
     public function it_understands_type_bool($key, $value)
     {
-        $this->assertSame($value, env($key, 'default'));
+        $this->assertSame($value, Env::get($key, 'default'));
     }
 
     /** @test */

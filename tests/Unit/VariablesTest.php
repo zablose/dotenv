@@ -7,7 +7,7 @@ use Zablose\DotEnv\Env;
 
 class VariablesTest extends UnitTestCase
 {
-    public static function setUpBeforeClass(): void
+    public function setUp(): void
     {
         (new Env())->reset()->read(__DIR__.'/../data/envs/variables.env');
     }
