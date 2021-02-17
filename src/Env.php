@@ -36,9 +36,11 @@ class Env
                 unset($variable);
             }
 
+            // @codeCoverageIgnoreStart
             if (! feof($file)) {
                 trigger_error('Reading of the file stopped before end of file.', E_USER_WARNING);
             }
+            // @codeCoverageIgnoreEnd
 
             fclose($file);
         }
