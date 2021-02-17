@@ -53,7 +53,7 @@ class Variable
         return $value;
     }
 
-    private static function replaceVarsWithValues(string $value, array $vars)
+    private static function replaceVarsWithValues(string $value, array $vars): string
     {
         $value = trim(trim($value), '"\'');
 
