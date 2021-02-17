@@ -12,7 +12,7 @@ class VariablesTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/variables.env');
     }
 
-    public function strings()
+    public function strings(): array
     {
         return [
             ['VAR_USER', 'zablose'],

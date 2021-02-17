@@ -12,7 +12,7 @@ class BooleansTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/booleans.env');
     }
 
-    public function booleans()
+    public function booleans(): array
     {
         return [
             ['VAR_BOOL', true],
@@ -31,7 +31,7 @@ class BooleansTest extends UnitTestCase
      */
     public function it_understands_type_bool($key, $value)
     {
-        $this->assertSame($value, Env::get($key, 'default'));
+        $this->assertSame($value, env($key, 'default'));
     }
 
     /** @test */

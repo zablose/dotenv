@@ -12,7 +12,7 @@ class SpecificsTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/specifics.env');
     }
 
-    public function specifics()
+    public function specifics(): array
     {
         return [
             ['ONLY_CLOSING_SINGLE_QUOTE', 'value'],

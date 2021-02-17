@@ -12,7 +12,7 @@ class StringsTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/strings.env');
     }
 
-    public function strings()
+    public function strings(): array
     {
         return [
             ['VAR_STRING', 'Just a string.'],

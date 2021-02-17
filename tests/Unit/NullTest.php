@@ -12,7 +12,7 @@ class NullTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/null.env');
     }
 
-    public function nullables()
+    public function nullables(): array
     {
         return [
             ['VAR_NULL', null],

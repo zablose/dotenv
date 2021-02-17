@@ -14,7 +14,7 @@ class ArraysTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/arrays.env');
     }
 
-    public function arrays()
+    public function arrays(): array
     {
         return [
             [

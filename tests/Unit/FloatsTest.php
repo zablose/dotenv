@@ -12,7 +12,7 @@ class FloatsTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/floats.env');
     }
 
-    public function floats()
+    public function floats(): array
     {
         return [
             ['VAR_FLOAT', 4.0],

@@ -12,7 +12,7 @@ class IntegersTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/integers.env');
     }
 
-    public function integers()
+    public function integers(): array
     {
         return [
             ['VAR_INT', 4],
