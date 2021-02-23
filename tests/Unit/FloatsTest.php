@@ -28,8 +28,8 @@ class FloatsTest extends UnitTestCase
     /** @test */
     public function float_method_gets_float_from_floats_and_int()
     {
-        $this->assertSame(4.0, Env::float('VAR_FLOAT'));
-        $this->assertSame(13.0, Env::float('VAR_INT'));
+        $this->assertSame(3.14, Env::float('VAR_FLOAT_PI'));
+        $this->assertSame(2.0, Env::float('VAR_INT_TWO'));
     }
 
     /** @test */
@@ -37,16 +37,16 @@ class FloatsTest extends UnitTestCase
     {
         $this->expectException(TypeError::class);
 
-        Env::float('VAR_STRING');
-        Env::float('VAR_BOOL');
-        Env::float('VAR_NULL');
         Env::float('VAR_ARRAY');
-        Env::float('VAR_EMPTY');
+        Env::float('VAR_BOOL_TRUE');
+        Env::float('VAR_NULL_AS_EMPTY');
+        Env::float('VAR_NULL_AS_STRING');
+        Env::float('VAR_STRING_HI');
     }
 
     /** @test */
     public function count_variables()
     {
-        $this->assertSame(11, count(Env::all()));
+        $this->assertSame(12, count(Env::all()));
     }
 }
