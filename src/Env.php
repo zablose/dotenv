@@ -7,7 +7,7 @@ class Env
     private static array $vars = [];
     private static array $arrays = [];
 
-    public static function get($key, $default = null)
+    public static function get(string $key, $default = null)
     {
         return self::$vars[$key] ?? $default;
     }
@@ -15,6 +15,11 @@ class Env
     public static function all(): array
     {
         return self::$vars;
+    }
+
+    public static function float(string $key, float $default = null): float
+    {
+        return Env::get($key, $default);
     }
 
     public function read(string $path): self
