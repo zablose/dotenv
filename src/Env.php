@@ -22,6 +22,11 @@ class Env
         return Env::get($key, $default);
     }
 
+    public static function int(string $key, int $default = null): int
+    {
+        return Env::get($key, $default);
+    }
+
     public function read(string $path): self
     {
         $file = fopen($path, 'r');

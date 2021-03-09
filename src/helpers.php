@@ -15,3 +15,10 @@ if (! function_exists('env_float')) {
         return Env::float($key, $default);
     }
 }
+
+if (! function_exists('env_int')) {
+    function env_int(string $key, int $default = null): int
+    {
+        return Env::int($key, $default);
+    }
+}
