@@ -33,14 +33,42 @@ class FloatsTest extends UnitTestCase
     }
 
     /** @test */
-    public function float_method_fails_on_wrong_type_values_but_int()
+    public function float_method_fails_on_array_value()
     {
         $this->expectException(TypeError::class);
 
         Env::float('VAR_ARRAY');
+    }
+
+    /** @test */
+    public function float_method_fails_on_bool_value()
+    {
+        $this->expectException(TypeError::class);
+
         Env::float('VAR_BOOL_TRUE');
+    }
+
+    /** @test */
+    public function float_method_fails_on_empty_value()
+    {
+        $this->expectException(TypeError::class);
+
         Env::float('VAR_NULL_AS_EMPTY');
+    }
+
+    /** @test */
+    public function float_method_fails_on_null_value()
+    {
+        $this->expectException(TypeError::class);
+
         Env::float('VAR_NULL_AS_STRING');
+    }
+
+    /** @test */
+    public function float_method_fails_on_string_value()
+    {
+        $this->expectException(TypeError::class);
+
         Env::float('VAR_STRING_HI');
     }
 
