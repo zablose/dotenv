@@ -70,10 +70,4 @@ class StringsTest extends UnitTestCase
 
         Env::string('VAR_NULL_AS_STRING');
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(11, count(Env::all()));
-    }
 }

@@ -92,10 +92,4 @@ class ArraysTest extends UnitTestCase
 
         Env::array('VAR_STRING_HI');
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(11, count(Env::all()));
-    }
 }

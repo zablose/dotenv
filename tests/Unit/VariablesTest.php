@@ -39,10 +39,4 @@ class VariablesTest extends UnitTestCase
     {
         $this->assertSame($value, env($key, 'default'));
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(9, count(Env::all()));
-    }
 }

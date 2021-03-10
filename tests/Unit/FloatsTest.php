@@ -71,10 +71,4 @@ class FloatsTest extends UnitTestCase
 
         Env::float('VAR_STRING_HI');
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(12, count(Env::all()));
-    }
 }

@@ -33,10 +33,4 @@ class NullTest extends UnitTestCase
     {
         $this->assertSame($value, env($key));
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(3, count(Env::all()));
-    }
 }

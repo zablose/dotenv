@@ -76,10 +76,4 @@ class BooleansTest extends UnitTestCase
 
         Env::bool('VAR_STRING_HI');
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(10, count(Env::all()));
-    }
 }

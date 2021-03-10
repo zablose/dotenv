@@ -15,8 +15,16 @@ class EnvTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/integers.env')
             ->read(__DIR__.'/../data/envs/strings.env');
 
-        $this->assertSame(4.0, env('VAR_FLOAT'));
-        $this->assertSame(4, env('VAR_INT'));
-        $this->assertSame('Just a string.', env('VAR_STRING'));
+        $this->assertSame(4.0, Env::float('VAR_FLOAT'));
+        $this->assertSame(4, Env::int('VAR_INT'));
+        $this->assertSame('Just a string.', Env::string('VAR_STRING'));
+    }
+
+    /** @test */
+    public function it_is_possible_to_get_all_variables_in_array()
+    {
+        (new Env())->reset()->setArrays(['VAR_ARRAY'])->read(__DIR__.'/../data/envs/mixed.env');
+
+        $this->assertSame(7, count(Env::all()));
     }
 }

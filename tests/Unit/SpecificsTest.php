@@ -39,10 +39,4 @@ class SpecificsTest extends UnitTestCase
     {
         $this->assertSame($value, env($key));
     }
-
-    /** @test */
-    public function count_variables()
-    {
-        $this->assertSame(6, count(Env::all()));
-    }
 }
