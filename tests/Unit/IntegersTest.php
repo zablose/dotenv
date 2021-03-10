@@ -16,19 +16,16 @@ class IntegersTest extends UnitTestCase
     }
 
     /** @test */
-    public function get_method_understands_int()
-    {
-        $this->assertSame(4, Env::get('VAR_INT'));
-        $this->assertSame(8, Env::get('VAR_INT_SINGLE_QUOTED'));
-        $this->assertSame(16, Env::get('VAR_INT_DOUBLE_QUOTED'));
-        $this->assertSame(-2, Env::get('VAR_INT_NEGATIVE'));
-        $this->assertSame(0, Env::get('VAR_INT_ZERO'));
-    }
-
-    /** @test */
     public function int_method_gets_int()
     {
         $this->assertSame(2, Env::int('VAR_INT_TWO'));
+        $this->assertSame(4, Env::int('VAR_INT'));
+        $this->assertSame(8, Env::int('VAR_INT_SINGLE_QUOTED'));
+        $this->assertSame(16, Env::int('VAR_INT_DOUBLE_QUOTED'));
+        $this->assertSame(-2, Env::int('VAR_INT_NEGATIVE'));
+        $this->assertSame(0, Env::int('VAR_INT_ZERO'));
+
+        $this->assertSame(null, Env::int('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -61,14 +58,6 @@ class IntegersTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::int('VAR_NULL_AS_EMPTY');
-    }
-
-    /** @test */
-    public function int_method_fails_on_null_value()
-    {
-        $this->expectException(TypeError::class);
-
-        Env::int('VAR_NULL_AS_STRING');
     }
 
     /** @test */

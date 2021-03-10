@@ -17,15 +17,16 @@ class ArraysTest extends UnitTestCase
     }
 
     /** @test */
-    public function get_method_understands_arrays()
+    public function array_method_gets_array()
     {
+        $this->assertSame([1 => 'one', 2 => 'two'], Env::array('VAR_ARRAY'));
         $this->assertSame(
             [
                 'laravel.com' => 'PHP framework for web artisans.',
                 'tailwindcss.com' => 'A utility-first CSS framework for rapidly building custom designs.',
                 'fontawesome.com' => 'Icons. Easy. Done.',
             ],
-            Env::get('VAR_DOMAINS')
+            Env::array('VAR_DOMAINS')
         );
         $this->assertSame(
             [
@@ -33,16 +34,12 @@ class ArraysTest extends UnitTestCase
                 1 => '_token',
                 '' => 'Without a key, second overwrites the first.',
             ],
-            Env::get('VAR_PROTECTED')
+            Env::array('VAR_PROTECTED')
         );
-        $this->assertSame("Won't be treated as array.", Env::get('PUB_VAR_PROTECTED_1'));
-        $this->assertSame("Won't be treated as array.", Env::get('VAR_USERS'));
-    }
+        $this->assertSame("Won't be treated as array.", Env::string('PUB_VAR_PROTECTED_1'));
+        $this->assertSame("Won't be treated as array.", Env::string('VAR_USERS'));
 
-    /** @test */
-    public function array_method_gets_array()
-    {
-        $this->assertSame([1 => 'one', 2 => 'two'], Env::array('VAR_ARRAY'));
+        $this->assertSame(null, Env::array('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -75,14 +72,6 @@ class ArraysTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::array('VAR_NULL_AS_EMPTY');
-    }
-
-    /** @test */
-    public function array_method_fails_on_null_value()
-    {
-        $this->expectException(TypeError::class);
-
-        Env::array('VAR_NULL_AS_STRING');
     }
 
     /** @test */

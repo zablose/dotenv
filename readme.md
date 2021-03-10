@@ -34,8 +34,9 @@ use Zablose\DotEnv\Env;
 
 use Zablose\DotEnv\Env;
 
-$db_name = Env::get('DB_NAME', 'dotenv');
-$db_password = Env::get('DB_PASSWORD');
+$db_name = Env::string('DB_NAME', 'dotenv');
+$db_password = Env::string('DB_PASSWORD');
+$db_port = Env::int('DB_PORT');
 
 ```
 
@@ -45,8 +46,9 @@ Or
 
 ```php
 
-$db_name = env('DB_NAME', 'dotenv');
-$db_password = env('DB_PASSWORD');
+$db_name = env_string('DB_NAME', 'dotenv');
+$db_password = env_string('DB_PASSWORD');
+$db_port = env_int('DB_PORT');
 
 ```
 
@@ -58,12 +60,12 @@ $db_password = env('DB_PASSWORD');
 
     USER=username
     EMAIL=${USER}@domain.com
-    
+
 ### Arrays
 
     PROTECTED_0=_token
     PROTECTED_1=password
-    
+
 ### Value Types
 
 | Type | Example |

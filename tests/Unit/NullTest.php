@@ -12,25 +12,11 @@ class NullTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/null.env');
     }
 
-    public function nullables(): array
+    /** @test */
+    public function it_understands_type_null()
     {
-        return [
-            ['VAR_NULL', null],
-            ['VAR_NULL_SINGLE_QUOTED', null],
-            ['VAR_NULL_DOUBLE_QUOTED', null],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider nullables
-     *
-     * @param $key
-     * @param $value
-     */
-    public function it_understands_type_null($key, $value)
-    {
-        $this->assertSame($value, env($key));
+        $this->assertSame(null, Env::float('VAR_NULL'));
+        $this->assertSame(null, Env::int('VAR_NULL_SINGLE_QUOTED'));
+        $this->assertSame(null, Env::string('VAR_NULL_DOUBLE_QUOTED'));
     }
 }

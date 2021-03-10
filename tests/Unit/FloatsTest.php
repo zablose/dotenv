@@ -16,20 +16,17 @@ class FloatsTest extends UnitTestCase
     }
 
     /** @test */
-    public function get_method_understands_float()
-    {
-        $this->assertSame(4.0, Env::get('VAR_FLOAT'));
-        $this->assertSame(8.01, Env::get('VAR_FLOAT_SINGLE_QUOTED'));
-        $this->assertSame(16.02, Env::get('VAR_FLOAT_DOUBLE_QUOTED'));
-        $this->assertSame(-2.48, Env::get('VAR_FLOAT_NEGATIVE'));
-        $this->assertSame(0.0, Env::get('VAR_FLOAT_ZERO'));
-    }
-
-    /** @test */
     public function float_method_gets_float_from_floats_and_int()
     {
         $this->assertSame(3.14, Env::float('VAR_FLOAT_PI'));
         $this->assertSame(2.0, Env::float('VAR_INT_TWO'));
+        $this->assertSame(4.0, Env::float('VAR_FLOAT'));
+        $this->assertSame(8.01, Env::float('VAR_FLOAT_SINGLE_QUOTED'));
+        $this->assertSame(16.02, Env::float('VAR_FLOAT_DOUBLE_QUOTED'));
+        $this->assertSame(-2.48, Env::float('VAR_FLOAT_NEGATIVE'));
+        $this->assertSame(0.0, Env::float('VAR_FLOAT_ZERO'));
+
+        $this->assertSame(null, Env::float('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -54,14 +51,6 @@ class FloatsTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::float('VAR_NULL_AS_EMPTY');
-    }
-
-    /** @test */
-    public function float_method_fails_on_null_value()
-    {
-        $this->expectException(TypeError::class);
-
-        Env::float('VAR_NULL_AS_STRING');
     }
 
     /** @test */

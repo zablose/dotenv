@@ -12,31 +12,17 @@ class SpecificsTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/specifics.env');
     }
 
-    public function specifics(): array
+    /** @test */
+    public function it_has_specifics()
     {
-        return [
-            ['ONLY_CLOSING_SINGLE_QUOTE', 'value'],
-            ['ONLY_OPENING_SINGLE_QUOTE', 'value'],
-            ['SINGLE_QUOTE_IN_THE_MIDDLE', "val'ue"],
-            ['EXTRA_SPACES', 'Will be trimmed.'],
-            ['VAR WITH SPACES', 'Will work!'],
+        $this->assertSame('value', Env::string('ONLY_CLOSING_SINGLE_QUOTE'));
+        $this->assertSame('value', Env::string('ONLY_OPENING_SINGLE_QUOTE'));
+        $this->assertSame("val'ue", Env::string('SINGLE_QUOTE_IN_THE_MIDDLE'));
+        $this->assertSame('Will be trimmed.', Env::string('EXTRA_SPACES'));
+        $this->assertSame('Will work!', Env::string('VAR WITH SPACES'));
 
-            ['VAR_RegiSter_Does_MATTER', 'VAlue does tOo.'],
-            ['var_register_does_matter', null],
-            ['VAR_REGISTER_DOES_MATTER', null],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider specifics
-     *
-     * @param $key
-     * @param $value
-     */
-    public function it_has_specifics($key, $value)
-    {
-        $this->assertSame($value, env($key));
+        $this->assertSame('VAlue does tOo.', Env::string('VAR_RegiSter_Does_MATTER'));
+        $this->assertSame(null, Env::string('var_register_does_matter'));
+        $this->assertSame(null, Env::string('VAR_REGISTER_DOES_MATTER'));
     }
 }

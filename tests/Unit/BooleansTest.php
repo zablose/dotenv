@@ -16,17 +16,14 @@ class BooleansTest extends UnitTestCase
     }
 
     /** @test */
-    public function get_method_understands_bool()
-    {
-        $this->assertSame(true, Env::get('VAR_BOOL'));
-        $this->assertSame(false, Env::get('VAR_BOOL_SINGLE_QUOTED'));
-        $this->assertSame(true, Env::get('VAR_BOOL_DOUBLE_QUOTED'));
-    }
-
-    /** @test */
     public function bool_method_gets_bool()
     {
         $this->assertSame(true, Env::bool('VAR_BOOL_TRUE'));
+        $this->assertSame(true, Env::bool('VAR_BOOL'));
+        $this->assertSame(false, Env::bool('VAR_BOOL_SINGLE_QUOTED'));
+        $this->assertSame(true, Env::bool('VAR_BOOL_DOUBLE_QUOTED'));
+
+        $this->assertSame(null, Env::bool('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -59,14 +56,6 @@ class BooleansTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::bool('VAR_NULL_AS_EMPTY');
-    }
-
-    /** @test */
-    public function bool_method_fails_on_null_value()
-    {
-        $this->expectException(TypeError::class);
-
-        Env::bool('VAR_NULL_AS_STRING');
     }
 
     /** @test */
