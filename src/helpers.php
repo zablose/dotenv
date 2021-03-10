@@ -22,3 +22,10 @@ if (! function_exists('env_int')) {
         return Env::int($key, $default);
     }
 }
+
+if (! function_exists('env_string')) {
+    function env_string(string $key, string $default = null): string
+    {
+        return Env::string($key, $default);
+    }
+}

@@ -15,6 +15,7 @@ class IntegersTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/mixed.env');
     }
 
+    /** @test */
     public function get_method_understands_int()
     {
         $this->assertSame(4, Env::get('VAR_INT'));
