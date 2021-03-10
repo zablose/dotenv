@@ -29,3 +29,10 @@ if (! function_exists('env_string')) {
         return Env::string($key, $default);
     }
 }
+
+if (! function_exists('env_array')) {
+    function env_array(string $key, array $default = null): array
+    {
+        return Env::array($key, $default);
+    }
+}
