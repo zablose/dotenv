@@ -36,3 +36,10 @@ if (! function_exists('env_array')) {
         return Env::array($key, $default);
     }
 }
+
+if (! function_exists('env_bool')) {
+    function env_bool(string $key, bool $default = null): bool
+    {
+        return Env::bool($key, $default);
+    }
+}

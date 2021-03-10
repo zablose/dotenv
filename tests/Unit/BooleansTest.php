@@ -3,40 +3,83 @@
 namespace Tests\Unit;
 
 use Tests\UnitTestCase;
+use TypeError;
 use Zablose\DotEnv\Env;
 
 class BooleansTest extends UnitTestCase
 {
     public function setUp(): void
     {
-        (new Env())->reset()->read(__DIR__.'/../data/envs/booleans.env');
+        (new Env())->reset()->setArrays(['VAR_ARRAY'])
+            ->read(__DIR__.'/../data/envs/booleans.env')
+            ->read(__DIR__.'/../data/envs/mixed.env');
     }
 
-    public function booleans(): array
+    /** @test */
+    public function get_method_understands_bool()
     {
-        return [
-            ['VAR_BOOL', true],
-            ['VAR_BOOL_SINGLE_QUOTED', false],
-            ['VAR_BOOL_DOUBLE_QUOTED', true],
-        ];
+        $this->assertSame(true, Env::get('VAR_BOOL'));
+        $this->assertSame(false, Env::get('VAR_BOOL_SINGLE_QUOTED'));
+        $this->assertSame(true, Env::get('VAR_BOOL_DOUBLE_QUOTED'));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider booleans
-     *
-     * @param $key
-     * @param $value
-     */
-    public function it_understands_type_bool($key, $value)
+    /** @test */
+    public function bool_method_gets_bool()
     {
-        $this->assertSame($value, env($key, 'default'));
+        $this->assertSame(true, Env::bool('VAR_BOOL_TRUE'));
+    }
+
+    /** @test */
+    public function bool_method_fails_on_array_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::bool('VAR_ARRAY');
+    }
+
+    /** @test */
+    public function bool_method_fails_on_float_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::bool('VAR_FLOAT_PI');
+    }
+
+    /** @test */
+    public function bool_method_fails_on_int_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::bool('VAR_INT_TWO');
+    }
+
+    /** @test */
+    public function bool_method_fails_on_empty_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::bool('VAR_NULL_AS_EMPTY');
+    }
+
+    /** @test */
+    public function bool_method_fails_on_null_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::bool('VAR_NULL_AS_STRING');
+    }
+
+    /** @test */
+    public function bool_method_fails_on_string_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::bool('VAR_STRING_HI');
     }
 
     /** @test */
     public function count_variables()
     {
-        $this->assertSame(3, count(Env::all()));
+        $this->assertSame(10, count(Env::all()));
     }
 }
