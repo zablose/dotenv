@@ -73,7 +73,6 @@ $db_port = env_int('DB_PORT');
 | Boolean | DEBUG_ON=true |
 | Float | PI=3.14 |
 | Integer | RAM=128 |
-| Null | LOG=null |
 | String | GREETING=Welcome back! |
 
 ## Development

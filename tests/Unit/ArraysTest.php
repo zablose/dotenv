@@ -36,10 +36,10 @@ class ArraysTest extends UnitTestCase
             ],
             Env::array('VAR_PROTECTED')
         );
+        $this->assertSame([], Env::array('VAR_ARRAY_UNKNOWN'));
+
         $this->assertSame("Won't be treated as array.", Env::string('PUB_VAR_PROTECTED_1'));
         $this->assertSame("Won't be treated as array.", Env::string('VAR_USERS'));
-
-        $this->assertSame(null, Env::array('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -71,7 +71,7 @@ class ArraysTest extends UnitTestCase
     {
         $this->expectException(TypeError::class);
 
-        Env::array('VAR_NULL_AS_EMPTY');
+        Env::array('VAR_EMPTY');
     }
 
     /** @test */
@@ -80,5 +80,13 @@ class ArraysTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::array('VAR_STRING_HI');
+    }
+
+    /** @test */
+    public function array_method_fails_on_null_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::array('VAR_UNKNOWN', null);
     }
 }

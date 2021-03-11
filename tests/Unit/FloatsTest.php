@@ -25,8 +25,6 @@ class FloatsTest extends UnitTestCase
         $this->assertSame(16.02, Env::float('VAR_FLOAT_DOUBLE_QUOTED'));
         $this->assertSame(-2.48, Env::float('VAR_FLOAT_NEGATIVE'));
         $this->assertSame(0.0, Env::float('VAR_FLOAT_ZERO'));
-
-        $this->assertSame(null, Env::float('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -50,7 +48,7 @@ class FloatsTest extends UnitTestCase
     {
         $this->expectException(TypeError::class);
 
-        Env::float('VAR_NULL_AS_EMPTY');
+        Env::float('VAR_EMPTY');
     }
 
     /** @test */
@@ -59,5 +57,13 @@ class FloatsTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::float('VAR_STRING_HI');
+    }
+
+    /** @test */
+    public function float_method_fails_on_null_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::float('VAR_UNKNOWN');
     }
 }

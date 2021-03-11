@@ -25,6 +25,6 @@ class EnvTest extends UnitTestCase
     {
         (new Env())->reset()->setArrays(['VAR_ARRAY'])->read(__DIR__.'/../data/envs/mixed.env');
 
-        $this->assertSame(7, count(Env::all()));
+        $this->assertSame(6, count(Env::all()));
     }
 }

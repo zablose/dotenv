@@ -22,7 +22,5 @@ class SpecificsTest extends UnitTestCase
         $this->assertSame('Will work!', Env::string('VAR WITH SPACES'));
 
         $this->assertSame('VAlue does tOo.', Env::string('VAR_RegiSter_Does_MATTER'));
-        $this->assertSame(null, Env::string('var_register_does_matter'));
-        $this->assertSame(null, Env::string('VAR_REGISTER_DOES_MATTER'));
     }
 }

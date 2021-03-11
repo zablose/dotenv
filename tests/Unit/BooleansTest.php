@@ -22,8 +22,6 @@ class BooleansTest extends UnitTestCase
         $this->assertSame(true, Env::bool('VAR_BOOL'));
         $this->assertSame(false, Env::bool('VAR_BOOL_SINGLE_QUOTED'));
         $this->assertSame(true, Env::bool('VAR_BOOL_DOUBLE_QUOTED'));
-
-        $this->assertSame(null, Env::bool('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -55,7 +53,7 @@ class BooleansTest extends UnitTestCase
     {
         $this->expectException(TypeError::class);
 
-        Env::bool('VAR_NULL_AS_EMPTY');
+        Env::bool('VAR_EMPTY');
     }
 
     /** @test */

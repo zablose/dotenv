@@ -24,8 +24,6 @@ class IntegersTest extends UnitTestCase
         $this->assertSame(16, Env::int('VAR_INT_DOUBLE_QUOTED'));
         $this->assertSame(-2, Env::int('VAR_INT_NEGATIVE'));
         $this->assertSame(0, Env::int('VAR_INT_ZERO'));
-
-        $this->assertSame(null, Env::int('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
@@ -57,7 +55,7 @@ class IntegersTest extends UnitTestCase
     {
         $this->expectException(TypeError::class);
 
-        Env::int('VAR_NULL_AS_EMPTY');
+        Env::int('VAR_EMPTY');
     }
 
     /** @test */
@@ -66,5 +64,13 @@ class IntegersTest extends UnitTestCase
         $this->expectException(TypeError::class);
 
         Env::int('VAR_STRING_HI');
+    }
+
+    /** @test */
+    public function int_method_fails_on_null_value()
+    {
+        $this->expectException(TypeError::class);
+
+        Env::int('VAR_UNKNOWN');
     }
 }

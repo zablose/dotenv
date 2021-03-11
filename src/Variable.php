@@ -46,10 +46,6 @@ class Variable
             return strpos($value, '.') === false ? intval($value) : floatval($value);
         }
 
-        if ($value === 'null') {
-            return null;
-        }
-
         return $value;
     }
 

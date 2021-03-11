@@ -19,13 +19,11 @@ class StringsTest extends UnitTestCase
     public function string_method_gets_string()
     {
         $this->assertSame('Hi', Env::string('VAR_STRING_HI'));
-        $this->assertSame('', Env::string('VAR_NULL_AS_EMPTY'));
+        $this->assertSame('', Env::string('VAR_EMPTY'));
         $this->assertSame('Just a string.', Env::string('VAR_STRING'));
         $this->assertSame('Single quoted string.', Env::string('VAR_STRING_SINGLE_QUOTED'));
         $this->assertSame('Double quoted string.', Env::string('VAR_STRING_DOUBLE_QUOTED'));
         $this->assertSame('', Env::string('VAR_STRING_EMPTY'));
-
-        $this->assertSame(null, Env::string('VAR_NULL_AS_STRING'));
     }
 
     /** @test */
