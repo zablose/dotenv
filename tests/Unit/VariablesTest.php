@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Tests\Unit;
 
@@ -32,10 +34,10 @@ class VariablesTest extends UnitTestCase
      *
      * @dataProvider strings
      *
-     * @param $key
-     * @param $value
+     * @param  string  $key
+     * @param  string  $value
      */
-    public function it_understands_variables($key, $value)
+    public function it_understands_variables(string $key, string $value)
     {
         $this->assertSame($value, Env::string($key));
     }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Zablose\DotEnv;
 
@@ -13,7 +15,7 @@ class Env
     {
         $value = self::$vars[$key] ?? $default;
 
-        if (is_null($value)){
+        if (is_null($value)) {
             throw new TypeError("Variable '$key' is not set and default value is null.");
         }
 
