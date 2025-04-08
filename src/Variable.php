@@ -9,7 +9,7 @@ class Variable
     public string $name = '';
     public bool $is_array = false;
     public string $array_key = '';
-    public $value = null;
+    public string|int|bool|float $value = '';
 
     public static function make(string $raw_name, string $raw_value, array $arrays, array $vars): self
     {
@@ -19,7 +19,7 @@ class Variable
         $variable->name = $var_name;
 
         foreach ($arrays as $array_name) {
-            if (strpos($var_name, $array_name.'_') === 0) {
+            if (str_starts_with($var_name, $array_name.'_')) {
                 $variable->is_array = true;
                 $variable->name = $array_name;
                 $variable->array_key = str_replace($array_name.'_', '', $var_name);
@@ -32,7 +32,7 @@ class Variable
         return $variable;
     }
 
-    private static function getValue(string $value, array $vars)
+    private static function getValue(string $value, array $vars): string|int|bool|float
     {
         $value = Variable::replaceVarsWithValues($value, $vars);
 
@@ -45,7 +45,7 @@ class Variable
         }
 
         if (is_numeric($value)) {
-            return strpos($value, '.') === false ? intval($value) : floatval($value);
+            return str_contains($value, '.') ? floatval($value) : intval($value);
         }
 
         return $value;
@@ -60,7 +60,7 @@ class Variable
 
         while ($var_start !== false && $var_end !== false && $var_end > $var_start) {
             $var_name = substr($value, $var_start + 2, $var_end - $var_start - 2);
-            $var_value = (string) $vars[$var_name] ?? 'undefined';
+            $var_value = (string) ($vars[$var_name] ?? 'undefined');
             $value = str_replace('${'.$var_name.'}', $var_value, $value);
             $var_start = strpos($value, '${');
             $var_end = strpos($value, '}');
