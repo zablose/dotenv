@@ -1,46 +1,56 @@
-version: '3'
 services:
 
-  dotenv-rsyslog:
+  dotenv-php-fpm:
+    image: zablose/php-fpm:${ZDI_VERSION_PHP}
     build:
-      context: ./docker-damp/
-      dockerfile: ./docker/files/rsyslog.df
-    image: zablose-rsyslog:3.11
-    container_name: dotenv-rsyslog
-    ports:
-      - '${DAMP_PORT_SYSLOG}:514'
-    volumes:
-      - ./docker-damp/logs/:/var/log/
-
-  dotenv-damp:
-    build:
-      context: ./docker-damp/
-      dockerfile: ./docker/files/damp.df
+      context: ./zdi/
+      dockerfile: files/php-fpm.df
       args:
-        - ARG_DAMP_LOG=${DAMP_LOG}
-        - ARG_USER_GROUP_ID=${DAMP_USER_GROUP_ID}
-        - ARG_USER_GROUP_NAME=${DAMP_USER_GROUP_NAME}
-        - ARG_USER_ID=${DAMP_USER_ID}
-        - ARG_USER_NAME=${DAMP_USER_NAME}
-        - ARG_WEB_DIR=${DAMP_WEB_DIR}
-    image: zablose-damp:10.8-php8.0
-    container_name: dotenv-damp
-    ports:
-      - '${DAMP_PORT_HTTP}:80'
-      - '${DAMP_PORT_HTTPS}:443'
-      - '${DAMP_PORT_DB}:3306'
-    extra_hosts:
-      - '${DAMP_WEB_DOMAIN}:127.0.0.1'
-      - 'www.${DAMP_WEB_DOMAIN}:127.0.0.1'
+        - ARG_ADD_COMPOSER=${ZDI_ADD_COMPOSER}
+        - ARG_ADD_LARAVEL=${ZDI_ADD_LARAVEL}
+        - ARG_DIR_WEB=${ZDI_DIR_WEB}
+        - ARG_ENV=${ZDI_ENV}
+        - ARG_TIMEZONE=${ZDI_TIMEZONE}
+        - ARG_USER_GROUP_ID=${ZDI_USER_GROUP_ID}
+        - ARG_USER_GROUP_NAME=${ZDI_USER_GROUP_NAME}
+        - ARG_USER_ID=${ZDI_USER_ID}
+        - ARG_USER_NAME=${ZDI_USER_NAME}
+        - ARG_VERSION_COMPOSER=${ZDI_VERSION_COMPOSER}
+        - ARG_VERSION_PHP=${ZDI_VERSION_PHP}
+    container_name: dotenv-php-fpm
+    environment:
+      ZDI_CONTAINER_NAME: dotenv-php-fpm
+      ZDI_DB_HOSTNAME: dotenv-mariadb
     volumes:
-      - ./.env:/home/${DAMP_USER_NAME}/.env
-      - $HOME/.composer/cache/:/home/${DAMP_USER_NAME}/.composer/cache/
-      - ./:${DAMP_WEB_DIR}/
-      - ./post-setup.sh:/home/${DAMP_USER_NAME}/post-setup.sh
+      - ./.env:/home/${ZDI_USER_NAME}/.env
+      - $HOME/.composer/cache/:/home/${ZDI_USER_NAME}/.composer/cache/
+      - ./:${ZDI_DIR_WEB}/
+      - ./post-setup.sh:/home/${ZDI_USER_NAME}/post-setup.sh
     logging:
       driver: syslog
       options:
-        syslog-address: 'tcp://127.0.0.1:${DAMP_PORT_SYSLOG}'
-        tag: 'docker/zablose-damp'
+        syslog-address: 'tcp://${ZDI_HOST_IP}:514'
+        tag: 'docker/dotenv-php-fpm'
     depends_on:
       - dotenv-rsyslog
+    networks:
+      - default
+
+  dotenv-rsyslog:
+    image: zablose/rsyslog:3.19.1
+    build:
+      context: ./zdi/
+      dockerfile: files/rsyslog.df
+    container_name: dotenv-rsyslog
+    ports:
+      - '${ZDI_HOST_IP}:514:514'
+    volumes:
+      - ./logs/:/var/log/
+    networks:
+      - default
+
+networks:
+  default:
+    name: zdev_default
+    driver: bridge
+    external: true
