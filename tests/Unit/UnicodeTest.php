@@ -28,6 +28,7 @@ class UnicodeTest extends UnitTestCase
             ['VAR_JP', '良い一日を！さようなら。'],
             ['VAR_LV', 'Jauku dienu! Uz redzēšanos.'],
             ['VAR_RU', 'Хорошего дня! До свидания.'],
+            ['VAR_MIX', 'Hello! 良い一日を！さようなら。 Have a nice day! Goodbye.'],
         ];
     }
 
