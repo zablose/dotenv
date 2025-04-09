@@ -15,7 +15,7 @@
         "php": "^8.3"
     },
     "require-dev": {
-        "phing/phing": "^2.17",
+        "phing/phing": "^3.0.1",
         "phpunit/phpunit": "^12.1.2"
     },
     "autoload": {
