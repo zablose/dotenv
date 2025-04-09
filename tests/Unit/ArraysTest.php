@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use TypeError;
 use Zablose\DotEnv\Env;
@@ -18,7 +19,7 @@ class ArraysTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/mixed.env');
     }
 
-    /** @test */
+    #[Test]
     public function array_method_gets_array()
     {
         $this->assertSame([1 => 'one', 2 => 'two'], Env::array('VAR_ARRAY'));
@@ -44,7 +45,7 @@ class ArraysTest extends UnitTestCase
         $this->assertSame("Won't be treated as array.", Env::string('VAR_USERS'));
     }
 
-    /** @test */
+    #[Test]
     public function array_method_fails_on_bool_value()
     {
         $this->expectException(TypeError::class);
@@ -52,7 +53,7 @@ class ArraysTest extends UnitTestCase
         Env::array('VAR_BOOL_TRUE');
     }
 
-    /** @test */
+    #[Test]
     public function array_method_fails_on_float_value()
     {
         $this->expectException(TypeError::class);
@@ -60,7 +61,7 @@ class ArraysTest extends UnitTestCase
         Env::array('VAR_FLOAT_PI');
     }
 
-    /** @test */
+    #[Test]
     public function array_method_fails_on_int_value()
     {
         $this->expectException(TypeError::class);
@@ -68,7 +69,7 @@ class ArraysTest extends UnitTestCase
         Env::array('VAR_INT_TWO');
     }
 
-    /** @test */
+    #[Test]
     public function array_method_fails_on_empty_value()
     {
         $this->expectException(TypeError::class);
@@ -76,7 +77,7 @@ class ArraysTest extends UnitTestCase
         Env::array('VAR_EMPTY');
     }
 
-    /** @test */
+    #[Test]
     public function array_method_fails_on_string_value()
     {
         $this->expectException(TypeError::class);
@@ -84,7 +85,7 @@ class ArraysTest extends UnitTestCase
         Env::array('VAR_STRING_HI');
     }
 
-    /** @test */
+    #[Test]
     public function array_method_fails_on_null_value()
     {
         $this->expectException(TypeError::class);

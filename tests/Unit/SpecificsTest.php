@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use Zablose\DotEnv\Env;
 
@@ -14,7 +15,7 @@ class SpecificsTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/specifics.env');
     }
 
-    /** @test */
+    #[Test]
     public function it_has_specifics()
     {
         $this->assertSame('value', Env::string('ONLY_CLOSING_SINGLE_QUOTE'));

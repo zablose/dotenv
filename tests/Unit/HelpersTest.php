@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use Zablose\DotEnv\Env;
 
@@ -14,7 +15,7 @@ class HelpersTest extends UnitTestCase
         (new Env())->reset()->setArrays(['VAR_ARRAY'])->read(__DIR__.'/../data/envs/mixed.env');
     }
 
-    /** @test */
+    #[Test]
     public function helper_functions_can_be_used()
     {
         $this->assertSame([1 => 'one', 2 => 'two'], env_array('VAR_ARRAY'));
