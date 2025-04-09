@@ -3,25 +3,25 @@
 <project name="dotenv" default="cleanup">
 
     <target name="cleanup" description="Delete generated folders and files.">
-        <delete dir="./.phpunit.cache" includeemptydirs="true" verbose="true" failonerror="true" />
-        <delete dir="./coverage-report" includeemptydirs="true" verbose="true" failonerror="true" />
-        <delete dir="./vendor" includeemptydirs="true" verbose="true" failonerror="true" />
+        <delete dir="./.phpunit.cache" includeemptydirs="true" verbose="true" failonerror="false" />
+        <delete dir="./coverage-report" includeemptydirs="true" verbose="true" failonerror="false" />
+        <delete dir="./vendor" includeemptydirs="true" verbose="true" failonerror="false" />
         <delete>
-            <fileset dir="./logs" errorOnMissingDir="true">
+            <fileset dir="./logs">
                 <include name="*.log" />
             </fileset>
         </delete>
     </target>
 
     <target name="prepare" description="Preparation for release.">
-        <delete dir="./.github" includeemptydirs="true" verbose="true" failonerror="true" />
-        <delete dir="./logs" includeemptydirs="true" verbose="true" failonerror="true" />
-        <delete dir="./tests" includeemptydirs="true" verbose="true" failonerror="true" />
-        <delete dir="./zdi" includeemptydirs="true" verbose="true" failonerror="true" />
+        <delete dir="./.github" includeemptydirs="true" verbose="true" failonerror="false" />
+        <delete dir="./logs" includeemptydirs="true" verbose="true" failonerror="false" />
+        <delete dir="./tests" includeemptydirs="true" verbose="true" failonerror="false" />
+        <delete dir="./zdi" includeemptydirs="true" verbose="true" failonerror="false" />
         <delete file=".gitmodules" />
         <delete>
-            <fileset dir="." errorOnMissingDir="true">
-                <include name=".env.example.*" />
+            <fileset dir=".">
+                <include name=".env.example" />
                 <include name="build.xml" />
                 <include name="docker-compose.example.*" />
                 <include name="phpunit.xml" />
