@@ -1,6 +1,6 @@
 {
     "name": "zablose/dotenv",
-    "description": "Read '.env' file to an array.",
+    "description": "Read '.env' file or files to a static array.",
     "keywords": [
         "dotenv"
     ],
@@ -12,10 +12,11 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0"
+        "php": "^8.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5.2"
+        "phing/phing": "^2.17",
+        "phpunit/phpunit": "^12.1.2"
     },
     "autoload": {
         "psr-4": {

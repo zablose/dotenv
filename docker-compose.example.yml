@@ -1,0 +1,56 @@
+services:
+
+  dotenv-php-fpm:
+    image: zablose/php-fpm:${ZDI_VERSION_PHP}
+    build:
+      context: ./zdi/
+      dockerfile: files/php-fpm.df
+      args:
+        - ARG_ADD_COMPOSER=${ZDI_ADD_COMPOSER}
+        - ARG_ADD_LARAVEL=${ZDI_ADD_LARAVEL}
+        - ARG_DIR_WEB=${ZDI_DIR_WEB}
+        - ARG_ENV=${ZDI_ENV}
+        - ARG_TIMEZONE=${ZDI_TIMEZONE}
+        - ARG_USER_GROUP_ID=${ZDI_USER_GROUP_ID}
+        - ARG_USER_GROUP_NAME=${ZDI_USER_GROUP_NAME}
+        - ARG_USER_ID=${ZDI_USER_ID}
+        - ARG_USER_NAME=${ZDI_USER_NAME}
+        - ARG_VERSION_COMPOSER=${ZDI_VERSION_COMPOSER}
+        - ARG_VERSION_PHP=${ZDI_VERSION_PHP}
+    container_name: dotenv-php-fpm
+    environment:
+      ZDI_CONTAINER_NAME: dotenv-php-fpm
+      ZDI_DB_HOSTNAME: dotenv-mariadb
+    volumes:
+      - ./.env:/home/${ZDI_USER_NAME}/.env
+      - $HOME/.composer/cache/:/home/${ZDI_USER_NAME}/.composer/cache/
+      - ./:${ZDI_DIR_WEB}/
+      - ./post-setup.sh:/home/${ZDI_USER_NAME}/post-setup.sh
+    logging:
+      driver: syslog
+      options:
+        syslog-address: 'tcp://${ZDI_HOST_IP}:514'
+        tag: 'docker/dotenv-php-fpm'
+    depends_on:
+      - dotenv-rsyslog
+    networks:
+      - default
+
+  dotenv-rsyslog:
+    image: zablose/rsyslog:3.19.1
+    build:
+      context: ./zdi/
+      dockerfile: files/rsyslog.df
+    container_name: dotenv-rsyslog
+    ports:
+      - '${ZDI_HOST_IP}:514:514'
+    volumes:
+      - ./logs/:/var/log/
+    networks:
+      - default
+
+networks:
+  default:
+    name: zdev_default
+    driver: bridge
+    external: true

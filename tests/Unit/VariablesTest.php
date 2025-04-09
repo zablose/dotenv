@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use Zablose\DotEnv\Env;
 
@@ -14,7 +16,7 @@ class VariablesTest extends UnitTestCase
         (new Env())->reset()->read(__DIR__.'/../data/envs/variables.env');
     }
 
-    public function strings(): array
+    public static function strings(): array
     {
         return [
             ['VAR_USER', 'zablose'],
@@ -29,14 +31,8 @@ class VariablesTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider strings
-     *
-     * @param  string  $key
-     * @param  string  $value
-     */
+    #[Test]
+    #[DataProvider('strings')]
     public function it_understands_variables(string $key, string $value)
     {
         $this->assertSame($value, Env::string($key));

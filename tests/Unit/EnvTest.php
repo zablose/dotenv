@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use Zablose\DotEnv\Env;
 
 class EnvTest extends UnitTestCase
 {
-    /** @test */
+    #[Test]
     public function it_is_possible_to_read_from_different_files()
     {
         (new Env())->reset()
@@ -22,7 +23,7 @@ class EnvTest extends UnitTestCase
         $this->assertSame('Just a string.', Env::string('VAR_STRING'));
     }
 
-    /** @test */
+    #[Test]
     public function it_is_possible_to_get_all_variables_in_array()
     {
         (new Env())->reset()->setArrays(['VAR_ARRAY'])->read(__DIR__.'/../data/envs/mixed.env');

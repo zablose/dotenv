@@ -27,12 +27,12 @@ class Env
         return self::$vars;
     }
 
-    public static function float(string $key, float $default = null): float
+    public static function float(string $key, ?float $default = null): float
     {
         return Env::get($key, $default);
     }
 
-    public static function int(string $key, int $default = null): int
+    public static function int(string $key, ?int $default = null): int
     {
         return Env::get($key, $default);
     }
@@ -58,7 +58,7 @@ class Env
 
         if ($file) {
             while (($line = fgets($file)) !== false) {
-                if (strpos($line, '=') === false) {
+                if (! str_contains($line, '=')) {
                     continue;
                 }
                 [$raw_name, $raw_value] = explode('=', $line);

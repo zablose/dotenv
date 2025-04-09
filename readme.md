@@ -1,8 +1,9 @@
+![](https://github.com/zablose/dotenv/actions/workflows/tests-on-master.yml/badge.svg)
+![](https://github.com/zablose/dotenv/actions/workflows/tests-on-dev.yml/badge.svg)
+
 # DotEnv
 
-[![Build Status](https://travis-ci.org/zablose/dotenv.svg?branch=master)](https://travis-ci.org/zablose/dotenv)
-
-Read '.env' file to a static array.
+Read '.env' file or files to a static array.
 
 ## Installation
 
@@ -14,13 +15,13 @@ composer require zablose/dotenv
 
 ### Read '.env' file(s)
 
-Probably in your `index.php` after auto loader.
+Probably in your `index.php` after autoloader.
 
 ```php
 
 use Zablose\DotEnv\Env;
 
-// Auto loader
+// Autoloader
 
 (new Env())->setArrays(['PROTECTED'])
     ->read(__DIR__.'/../.env')
@@ -68,28 +69,19 @@ $db_port = env_int('DB_PORT');
 
 ### Value Types
 
-| Type | Example |
-| --- | --- |
-| Boolean | DEBUG_ON=true |
-| Float | PI=3.14 |
-| Integer | RAM=128 |
-| String | GREETING=Welcome back! |
+| Type    | Example                |
+|---------|------------------------|
+| Boolean | DEBUG_ON=true          |
+| Float   | PI=3.14                |
+| Integer | RAM=128                |
+| String  | GREETING=Welcome back! |
 
 ## Development
 
-> Check submodule's [readme](https://github.com/zablose/docker-damp/blob/master/readme.md) for more details about
+> Check submodule's [readme](https://github.com/zablose/docker-images/blob/main/readme.md) for more details about
 > development environment used.
 
-### Hosts
-
-Append to `/etc/hosts`.
-
-```
-127.0.0.1       dotenv.zdev
-127.0.0.1       www.dotenv.zdev
-```
-
-### Quick Start
+### Quick start
 
     $ git clone -b 'dev' --single-branch --depth 1 https://github.com/zablose/dotenv.git dotenv
     $ cd dotenv
@@ -97,17 +89,28 @@ Append to `/etc/hosts`.
     
     # Copy env file, then ammend it to your needs.
     $ cp .env.example .env
+
+    # Copy docker compose file, then ammend it, if needed.
+    $ cp docker-compose.example.yml docker-compose.yml
     
-    $ docker-compose -p zdev up -d
+    $ docker-compose up -d
     
     # To see post-script logs, while container is starting.
-    $ tail -f docker-damp/logs/all.log
+    $ tail -f ./logs/all.log
     
     # To enter container, using Bash shell.
-    $ docker exec -it dotenv-damp bash
+    $ docker exec -it dotenv-php-fpm bash
     
-    (dotenv-damp)$ phpunit
+    (dotenv-php-fpm)$ php vendor/bin/phpunit
 
-## License
+### Build
 
-This package is free software distributed under the terms of the MIT license.
+* Merge changes from your branch to `master`;
+* Create a new branch from updated `master` called like `build-2.0.0`;
+* Run `php vendor/bin/phing prepare` to remove all irrelevant files and folders;
+* Commit changes with message like `Prepare build.`;
+* Merge branch `build-2.0.0` to `build` branch;
+* Delete `build-*` branch;
+* Use tag `2.0.0` on `build` branch to do the release.
+
+> Obviously, replace example `2.0.0` version with yours.

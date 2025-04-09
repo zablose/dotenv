@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use TypeError;
 use Zablose\DotEnv\Env;
@@ -17,7 +18,7 @@ class StringsTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/mixed.env');
     }
 
-    /** @test */
+    #[Test]
     public function string_method_gets_string()
     {
         $this->assertSame('Hi', Env::string('VAR_STRING_HI'));
@@ -28,7 +29,7 @@ class StringsTest extends UnitTestCase
         $this->assertSame('', Env::string('VAR_STRING_EMPTY'));
     }
 
-    /** @test */
+    #[Test]
     public function string_method_fails_on_array_value()
     {
         $this->expectException(TypeError::class);
@@ -36,7 +37,7 @@ class StringsTest extends UnitTestCase
         Env::string('VAR_ARRAY');
     }
 
-    /** @test */
+    #[Test]
     public function string_method_fails_on_bool_value()
     {
         $this->expectException(TypeError::class);
@@ -44,7 +45,7 @@ class StringsTest extends UnitTestCase
         Env::string('VAR_BOOL_TRUE');
     }
 
-    /** @test */
+    #[Test]
     public function string_method_fails_on_float_value()
     {
         $this->expectException(TypeError::class);
@@ -52,7 +53,7 @@ class StringsTest extends UnitTestCase
         Env::string('VAR_FLOAT_PI');
     }
 
-    /** @test */
+    #[Test]
     public function string_method_fails_on_int_value()
     {
         $this->expectException(TypeError::class);

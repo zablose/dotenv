@@ -3,14 +3,14 @@
 use Zablose\DotEnv\Env;
 
 if (! function_exists('env_float')) {
-    function env_float(string $key, float $default = null): float
+    function env_float(string $key, ?float $default = null): float
     {
         return Env::float($key, $default);
     }
 }
 
 if (! function_exists('env_int')) {
-    function env_int(string $key, int $default = null): int
+    function env_int(string $key, ?int $default = null): int
     {
         return Env::int($key, $default);
     }

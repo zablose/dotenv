@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use TypeError;
 use Zablose\DotEnv\Env;
@@ -17,7 +18,7 @@ class BooleansTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/mixed.env');
     }
 
-    /** @test */
+    #[Test]
     public function bool_method_gets_bool()
     {
         $this->assertSame(true, Env::bool('VAR_BOOL_TRUE'));
@@ -26,7 +27,7 @@ class BooleansTest extends UnitTestCase
         $this->assertSame(true, Env::bool('VAR_BOOL_DOUBLE_QUOTED'));
     }
 
-    /** @test */
+    #[Test]
     public function bool_method_fails_on_array_value()
     {
         $this->expectException(TypeError::class);
@@ -34,7 +35,7 @@ class BooleansTest extends UnitTestCase
         Env::bool('VAR_ARRAY');
     }
 
-    /** @test */
+    #[Test]
     public function bool_method_fails_on_float_value()
     {
         $this->expectException(TypeError::class);
@@ -42,7 +43,7 @@ class BooleansTest extends UnitTestCase
         Env::bool('VAR_FLOAT_PI');
     }
 
-    /** @test */
+    #[Test]
     public function bool_method_fails_on_int_value()
     {
         $this->expectException(TypeError::class);
@@ -50,7 +51,7 @@ class BooleansTest extends UnitTestCase
         Env::bool('VAR_INT_TWO');
     }
 
-    /** @test */
+    #[Test]
     public function bool_method_fails_on_empty_value()
     {
         $this->expectException(TypeError::class);
@@ -58,7 +59,7 @@ class BooleansTest extends UnitTestCase
         Env::bool('VAR_EMPTY');
     }
 
-    /** @test */
+    #[Test]
     public function bool_method_fails_on_string_value()
     {
         $this->expectException(TypeError::class);

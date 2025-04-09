@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
+use PHPUnit\Framework\Attributes\Test;
 use Tests\UnitTestCase;
 use TypeError;
 use Zablose\DotEnv\Env;
@@ -17,7 +18,7 @@ class IntegersTest extends UnitTestCase
             ->read(__DIR__.'/../data/envs/mixed.env');
     }
 
-    /** @test */
+    #[Test]
     public function int_method_gets_int()
     {
         $this->assertSame(2, Env::int('VAR_INT_TWO'));
@@ -28,7 +29,7 @@ class IntegersTest extends UnitTestCase
         $this->assertSame(0, Env::int('VAR_INT_ZERO'));
     }
 
-    /** @test */
+    #[Test]
     public function int_method_fails_on_array_value()
     {
         $this->expectException(TypeError::class);
@@ -36,7 +37,7 @@ class IntegersTest extends UnitTestCase
         Env::int('VAR_ARRAY');
     }
 
-    /** @test */
+    #[Test]
     public function int_method_fails_on_bool_value()
     {
         $this->expectException(TypeError::class);
@@ -44,7 +45,7 @@ class IntegersTest extends UnitTestCase
         Env::int('VAR_BOOL_TRUE');
     }
 
-    /** @test */
+    #[Test]
     public function int_method_fails_on_float_value()
     {
         $this->expectException(TypeError::class);
@@ -52,7 +53,7 @@ class IntegersTest extends UnitTestCase
         Env::int('VAR_FLOAT_PI');
     }
 
-    /** @test */
+    #[Test]
     public function int_method_fails_on_empty_value()
     {
         $this->expectException(TypeError::class);
@@ -60,7 +61,7 @@ class IntegersTest extends UnitTestCase
         Env::int('VAR_EMPTY');
     }
 
-    /** @test */
+    #[Test]
     public function int_method_fails_on_string_value()
     {
         $this->expectException(TypeError::class);
@@ -68,7 +69,7 @@ class IntegersTest extends UnitTestCase
         Env::int('VAR_STRING_HI');
     }
 
-    /** @test */
+    #[Test]
     public function int_method_fails_on_null_value()
     {
         $this->expectException(TypeError::class);
