@@ -5,6 +5,7 @@
     <target name="cleanup" description="Delete generated folders and files.">
         <delete dir="./.phpunit.cache" includeemptydirs="true" verbose="true" failonerror="true" />
         <delete dir="./coverage-report" includeemptydirs="true" verbose="true" failonerror="true" />
+        <delete dir="./vendor" includeemptydirs="true" verbose="true" failonerror="true" />
         <delete>
             <fileset dir="./logs" errorOnMissingDir="true">
                 <include name="*.log" />
@@ -22,7 +23,7 @@
             <fileset dir="." errorOnMissingDir="true">
                 <include name=".env.example.*" />
                 <include name="build.xml" />
-                <include name="docker-compose.*" />
+                <include name="docker-compose.example.*" />
                 <include name="phpunit.xml" />
                 <include name="post-setup.sh" />
             </fileset>

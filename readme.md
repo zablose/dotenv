@@ -89,6 +89,9 @@ $db_port = env_int('DB_PORT');
     
     # Copy env file, then ammend it to your needs.
     $ cp .env.example .env
+
+    # Copy docker compose file, then ammend it, if needed.
+    $ cp docker-compose.example.yml docker-compose.yml
     
     $ docker-compose up -d
     
