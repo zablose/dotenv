@@ -3,7 +3,7 @@
 
 # DotEnv
 
-Read '.env' file to a static array.
+Read '.env' file or files to a static array.
 
 ## Installation
 
@@ -81,7 +81,7 @@ $db_port = env_int('DB_PORT');
 > Check submodule's [readme](https://github.com/zablose/docker-images/blob/main/readme.md) for more details about
 > development environment used.
 
-### Quick Start
+### Quick start
 
     $ git clone -b 'dev' --single-branch --depth 1 https://github.com/zablose/dotenv.git dotenv
     $ cd dotenv
@@ -100,6 +100,14 @@ $db_port = env_int('DB_PORT');
     
     (dotenv-php-fpm)$ php vendor/bin/phpunit
 
-## License
+### Build
 
-This package is free software distributed under the terms of the MIT license.
+* Merge changes from your branch to `master`;
+* Create a new branch from updated `master` called like `build-2.0.0`;
+* Run `php vendor/bin/phing prepare` to remove all irrelevant files and folders;
+* Commit changes with message like `Prepare build.`;
+* Merge branch `build-2.0.0` to `build` branch;
+* Delete `build-*` branch;
+* Use tag `2.0.0` on `build` branch to do the release.
+
+> Obviously, replace example `2.0.0` version with yours.

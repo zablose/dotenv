@@ -1,6 +1,6 @@
 {
     "name": "zablose/dotenv",
-    "description": "Read '.env' file to an array.",
+    "description": "Read '.env' file or files to a static array.",
     "keywords": [
         "dotenv"
     ],
